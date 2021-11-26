@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Camp Delivery",
+    "slug": "camp-entregas",
+    "version": "1.8.2",
+    "platforms": ["android"],
+    "sdkVersion": "38.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon-1-1.png",
+    "primaryColor": "#FF0000",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "splash": {
+      "image": "./assets/logo-1-1.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FF0000"
+    },
+    "notification": {
+      "icon": "./assets/notification/notification.png",
+      "color": "#FF0000",
+      "androidMode": "default",
+      "androidCollapsedTitle": "Camp Delivery",
+      "iosDisplayInForeground": true
+    },
+    "android": {
+      "package": "com.k43g0n.campentregas",
+      "icon": "./assets/icon-1-1.png",
+      "adaptiveIcon": {
+        "backgroundImage": "./assets/ico_1.png"
+      },
+      "backgroundColor": "#FF0000",
+      "googleServicesFile": "./google-services.json",
+      "permissions":["ACCESS_COARSE_LOCATION","ACCESS_FINE_LOCATION"],
+      "versionCode": 13
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "js",
+        "json",
+        "ts",
+        "tsx",
+        "vue"
+      ]
+    }
+  }
+}

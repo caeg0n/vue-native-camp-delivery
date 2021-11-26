@@ -1,0 +1,169 @@
+#USING LODASH IN REACT_NATIVE
+processRestaurantListData(organizationsCategory){
+      var arr = []
+      //var _ = require('lodash')
+
+      
+
+#TOAST
+        // Toast.show('ESCOLHA O ENDEREÇO', {
+        //   duration: Toast.durations.SHORT,
+        //   position: Toast.positions.CENTER,
+        //   shadow: false,
+        //   backgroundColor: 'blue',
+        //   animation: true,
+        //   hideOnPress: true,
+        //   delay: 0
+        // })
+        // Toast.show('ESCOLHA UM ENDEREÇO!', {
+        //   duration: Toast.durations.LONG,
+        //   position: Toast.positions.TOP,
+        //   shadow: false,
+        //   backgroundColor: 'blue',
+        //   animation: true,
+        //   hideOnPress: true,
+        //   delay: 0
+        // })
+        // Toast.show({
+        //       text: "Escolha um Endereço!",
+        //       buttonText: "Ok",
+        //       position: "top",
+        //       type: "danger",
+        //       duration: 2000
+        //     })
+
+
+#TABS
+#GET PARAMETRO DA TAB PRA SABER EM QUAL TAB O KRA CLICOU
+<template>
+<nb-tabs :tabBarUnderlineStyle="{borderBottomColor:'red',borderBottomWidth:4}" :page="page" :onChangeTab="(e)=>x(e)">
+</template>
+  methods:{
+    x(r){
+      //from vai falar onde a tab estava 
+      //i vai falar o destino do click pra onde a tab vai
+      alert(r.from,r.i)
+    },
+}
+
+
+
+#build & publish commands
+expo upload:android
+expo build:android --release-channel stage-v1 #build se nao tiver nenhum build já feito
+expo publish --release-channel=stage-v1 # publish se ja tiver um build q vai ser atualizado com o publish
+
+
+"@react-native-community/datetimepicker": "^3.0.2",
+    "lottie-ios": "^3.1.8",
+    "lottie-react-native": "~2.6.1",
+    "jwt-decode": "^2.2.0",
+    "react-native-webview": "8.1.1",
+    "vue-crono": "^2.0.9",
+    "expo-jwt": "^1.3.0",
+    "@unicef/material-ui-currency-textfield": "^0.8.6",
+    
+    
+#spinner
+<template>
+<nb-spinner v-if="!isAnyDeliveryRegistered && spinner" color="red" :style="{marginTop:130}" />
+<view v-if="!spinner" :style="{ marginTop:130,alignItems: 'center',fontWight:'bold'}">
+  <nb-thumbnail large :source="ec" />
+  <text class="x">NENHUMA ENTREGA ENCONTRADA</text>
+</view>
+</template>
+<script>
+computed:{
+  deliveries(){
+    return this.$store.state.deliveries.items
+  },
+  isAnyDeliveryRegistered(){
+    this.isNoOneDelivery()
+    return Object.keys(this.deliveries).length > 0
+  },
+},
+methods: {
+  async isNoOneDelivery(){
+    let l = await this.$store.dispatch('deliveries/fetchNumberOfDeliveries',this.auth)
+    if (l == 0){
+      this.spinner = false
+    }
+    else{
+      this.spinner = true
+    }
+    return
+  },
+}
+</script>
+
+
+#EXCUTE ON GOBACK
+#na origem
+methods:{
+  refresh(){
+    this.navigation.navigate('Buy')
+  },
+
+  async finalizeOrder(){
+    this.navigation.navigate('History',{onGoBack: this.refresh})
+  }
+}
+#no destino
+this.navigation.state.params.onGoBack()
+this.navigation.goBack()
+
+
+
+#push notification em apenas 5 minutos com o expo
+https://dev.to/rishikeshvedpathak/implement-push-notification-in-react-native-using-expo-in-just-5-min-4c1m
+
+#EXCUTANDO DOIS COMANDOS ONPRESS
+:onPress="()=>{select('ME');changeDeliveryState()}"
+
+
+#BUG DO TOAST SOBRE OUTROS BOTOES E NAVIGATORS
+import { Toast } from 'native-base'
+  import { AsyncStorage } from 'react-native'
+  import { Root, Container, Content } from 'native-base'
+  export default{
+    components:{ Root },
+
+#ASYNC AWAIT USANDO
+async cadastraProduto(){
+      await this.mostraSpinner(true)
+      await this.uploadFoto(this)
+      this.resetForm()
+    },
+    async uploadFoto(context){
+      let cloud = 'campinapolis-com'
+      let upload_url = 'https://api.cloudinary.com/v1_1/campinapolis-com/image/upload'
+      let formdata = new FormData()
+      let uri = this.fotomeme
+      formdata.append('file', {uri: uri, type: 'image/png', name: 'upload.png'})
+      formdata.append('upload_preset','camp-delivery')
+      await axios({
+        method: 'post',
+        url: upload_url,
+        data: formdata
+      }).then(function (response) {
+        if (!context.$v.form.$invalid){
+          let dataTemp = new FormData()
+          let dataFinal = new FormData()
+          let data = response.data
+          let url = data["url"]
+          context.form.img = url
+          context.$store.dispatch('products/newProduct',context.form).then(() => {
+            context.mostraSpinner(false)          
+          }
+          ).catch(err =>{
+            null
+          })
+        }
+      }).catch(function (response) {
+        null
+      })
+    }
+
+
+#IMAGE
+:source="{uri: product.img}"
